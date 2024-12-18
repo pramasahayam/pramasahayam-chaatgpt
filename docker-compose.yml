@@ -1,6 +1,23 @@
 services:
+  ollama:
+    image: "ollama/ollama:latest"
+    restart: always
+    pull_policy: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - website_ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:cuda
+    pull_policy: always
     restart: always
     ports:
       - "3000:8080"
@@ -17,21 +34,6 @@ services:
               capabilities: [gpu]
     environment:
       WEBUI_NAME: "Chaat GPT"
-
-  ollama:
-    image: "ollama/ollama:latest"
-    restart: always
-    ports:
-      - "11434:11434"
-    volumes:
-      - website_ollama:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
 
 volumes:
   website_ollama:
