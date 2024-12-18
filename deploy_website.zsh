@@ -4,4 +4,4 @@
 git pull origin main  # Adjust the branch name if needed
 
 # Run docker-compose up -d
-docker-compose up -d
+docker compose up -d
