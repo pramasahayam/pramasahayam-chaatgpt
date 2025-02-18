@@ -34,9 +34,19 @@ services:
               capabilities: [gpu]
     environment:
       WEBUI_NAME: "Chaat GPT"
-
+  enclosed:
+    image: corentinth/enclosed
+    ports:
+      - 8787:8787
+    volumes:
+      - enclosed-data:/app/.data
+    restart: unless-stopped
+    
 volumes:
   website_ollama:
     external: true
   website_open-webui:
     external: true
+  website_enclosed-data:
+    external: true
+    driver: local
