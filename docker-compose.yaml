@@ -48,5 +48,4 @@ volumes:
   website_open-webui:
     external: true
   website_enclosed-data:
-    external: true
     driver: local
